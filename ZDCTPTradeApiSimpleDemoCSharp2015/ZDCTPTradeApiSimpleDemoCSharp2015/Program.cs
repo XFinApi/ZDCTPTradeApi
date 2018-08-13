@@ -310,7 +310,7 @@ namespace ZDCTPTradeApiSimpleDemoCSharp2015
             // char* path 指 xxx.exe 同级子目录中的 xxx.dll 文件
             int err = -1;
 
-            market = ITradeApi.XFinApi_CreateMarketApi("XTA_W32/Api/ZDCTP_v20171130/XFinApi.ZDCTPTradeApi.dll", out err);
+            market = ITradeApi.XFinApi_CreateMarketApi("XTA_W32/Api/ZDCTP_v20180404/XFinApi.ZDCTPTradeApi.dll", out err);
 
 
             if (err > 0 || market == null)
@@ -363,7 +363,7 @@ namespace ZDCTPTradeApiSimpleDemoCSharp2015
             // char* path 指 xxx.exe 同级子目录中的 xxx.dll 文件
             int err = -1;
 
-            trade = ITradeApi.XFinApi_CreateTradeApi("XTA_W32/Api/ZDCTP_v20171130/XFinApi.ZDCTPTradeApi.dll", out err);
+            trade = ITradeApi.XFinApi_CreateTradeApi("XTA_W32/Api/ZDCTP_v20180404/XFinApi.ZDCTPTradeApi.dll", out err);
 
             if (err > 0 || trade == null)
             {

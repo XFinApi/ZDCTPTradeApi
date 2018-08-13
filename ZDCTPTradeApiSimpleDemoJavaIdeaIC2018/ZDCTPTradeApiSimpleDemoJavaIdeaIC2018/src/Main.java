@@ -288,7 +288,7 @@ public class Main {
         // char* path 指 xxx.exe 同级子目录中的 xxx.dll 文件
         int[] err = new int[1];
 
-        market = XFinApi.TradeApi.ITradeApi.XFinApi_CreateMarketApi("XTA_W32/Api/ZDCTP_v20171130/XFinApi.ZDCTPTradeApi.dll", err);
+        market = XFinApi.TradeApi.ITradeApi.XFinApi_CreateMarketApi("XTA_W32/Api/ZDCTP_v20180404/XFinApi.ZDCTPTradeApi.dll", err);
         if (err[0] > 0 ||  market == null) {
             System.out.println(String.format("* Market XFinApiCreateError=%s;", StrCreateErrors[err[0]]));
             return;
@@ -340,7 +340,7 @@ public class Main {
         // char* path 指 xxx.exe 同级子目录中的 xxx.dll 文件
         int[] err = new int[1];
 
-        trade = ITradeApi.XFinApi_CreateTradeApi("XTA_W32/Api/ZDCTP_v20171130/XFinApi.ZDCTPTradeApi.dll", err);
+        trade = ITradeApi.XFinApi_CreateTradeApi("XTA_W32/Api/ZDCTP_v20180404/XFinApi.ZDCTPTradeApi.dll", err);
 
         if (trade == null) {
             System.out.println(String.format("* Trade XFinApiCreateError=%s;", StrCreateErrors[err[0]]));

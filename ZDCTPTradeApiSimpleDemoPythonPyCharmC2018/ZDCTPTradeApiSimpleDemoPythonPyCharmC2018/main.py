@@ -112,7 +112,7 @@ class MarketTest:
             del self.marketEvent
 
     def test(self):
-        self.market = XFinApi_TradeApi.XFinApi_CreateMarketApi("XTA_W32/Api/ZDCTP_v20171130/XFinApi.ZDCTPTradeApi.dll")
+        self.market = XFinApi_TradeApi.XFinApi_CreateMarketApi("XTA_W32/Api/ZDCTP_v20180404/XFinApi.ZDCTPTradeApi.dll")
         if isinstance(self.market,int):
             print("* Market XFinApiCreateError={};".format(StrCreateErrors[self.market]))
             return
@@ -228,7 +228,7 @@ class TradeTest:
     def Test(self):
         # 创建ITrade char * path指xxx.exe同级子目录中的xxx.dll文件
         self.trade = XFinApi_TradeApi.XFinApi_CreateTradeApi(
-            "XTA_W32/Api/ZDCTP_v20171130/XFinApi.ZDCTPTradeApi.dll")
+            "XTA_W32/Api/ZDCTP_v20180404/XFinApi.ZDCTPTradeApi.dll")
         if isinstance(self.trade,int):
             print("* Trade XFinApiCreateError={};".format(StrCreateErrors[self.trade]))
             return

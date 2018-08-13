@@ -1,45 +1,7 @@
 ﻿/*******************************************************
-* ZDCTPTradeApiSimpleDemoVC2015
+* ZDCTPTradeApiSimpleDemoLinux64GCC
 * www.xfinapi.com
 *******************************************************/
-
-/*
-VC++2015工程配置
-
-1、包含目录
-选择工程-属性-VC++目录-包含目录
-添加：$(Solutiondir)..\XTA_W32\Cpp
-
-2、lib库目录
-选择工程-属性-VC++目录-库目录
-添加：$(Solutiondir)..\XTA_W32\Cpp
-
-3、lib依赖项
-选择工程-属性-链接器-输入-附加依赖项
-添加：
-release使用：XFinApi.ITradeApi.lib
-或
-debug使用：XFinApi.ITradeApid.lib
-
-4、调试工作目录
-选择工程-属性-调试-工作目录
-修改为：$(TargetDir)
-
-5、拷贝库文件
-参考copy.bat手动拷贝
-或
-运行时自动拷贝：
-选择工程-属性-生成事件-后期生成事件-命令行，添加：copy.bat
-*/
-
-/*
-开发完成的程序发布
-
-1.拷贝XFinApi.ITradeApi.dll到可执行文件目录
-
-2.拷贝XTA_W32\Api\ZDCTP_vXXXXXXXX目录（XXXXXXXX为版本号）下的所有dll文件到可执行文件目录，
-建议保留dll文件所处目录结构，解决接口dll文件可能重名的问题。
-*/
 
 #include <iostream>
 #include <algorithm>
@@ -116,7 +78,7 @@ static void PrintNotifyInfo(const XFinApi::TradeApi::NotifyParams &param)
 
 static void PrintSubscribedInfo(const XFinApi::TradeApi::QueryParams &instInfo)
 {
-	printf("- OnSubscribed: %s %s\n",instInfo.ExchangeID.c_str(), instInfo.InstrumentID.c_str());
+	printf("- OnSubscribed: %s %s\n", instInfo.ExchangeID.c_str(), instInfo.InstrumentID.c_str());
 }
 
 static void PrintUnsubscribedInfo(const XFinApi::TradeApi::QueryParams &instInfo)
@@ -126,7 +88,7 @@ static void PrintUnsubscribedInfo(const XFinApi::TradeApi::QueryParams &instInfo
 
 static void PrintTickInfo(const XFinApi::TradeApi::Tick &tick)
 {
-	printf("  Tick,%s, HighestPrice=%g, LowestPrice=%g, BidPrice0=%g, BidVolume0=%lld, AskPrice0=%g, AskVolume0=%lld, LastPrice=%g, LastVolume=%lld, TradingTime=%s\n",
+	printf("  Tick, %s, HighestPrice=%g, LowestPrice=%g, BidPrice0=%g, BidVolume0=%ld, AskPrice0=%g, AskVolume0=%ld, LastPrice=%g, LastVolume=%ld, TradingDay=%s, TradingTime=%s\n",
 		tick.InstrumentID.c_str(),
 		tick.HighestPrice,
 		tick.LowestPrice,
@@ -136,21 +98,21 @@ static void PrintTickInfo(const XFinApi::TradeApi::Tick &tick)
 		tick.AskVolume[0],
 		tick.LastPrice,
 		tick.LastVolume,
+		tick.TradingDay.c_str(),
 		tick.TradingTime.c_str());
 }
 
 static void  PrintOrderInfo(const XFinApi::TradeApi::Order &order)
 {
-	printf("  ProductType=%d, Ref=%s, ID=%s, ExchangeID=%s, InstID=%s, Price=%g, Volume=%lld, NoTradedVolume=%lld, Direction=%d, OpenCloseType=%d, PriceCond=%d, TimeCond=%d, VolumeCond=%d, Status=%d, Msg=%s, %s\n",
-		order.ProductType,
+	printf("  ProductType=%d, Ref=%s, ID=%s, ExchangeID=%s, InstID=%s, Price=%g, Volume=%ld, NoTradedVolume=%ld, Direction=%d, OpenCloseType=%d, PriceCond=%d, TimeCond=%d, VolumeCond=%d, Status=%d, Msg=%s, %s\n",
+		(int)order.ProductType,
 		order.OrderRef.c_str(), order.OrderID.c_str(),
-		order.ExchangeID.c_str(), order.InstrumentID.c_str(),
-		order.Price, order.Volume, order.NoTradedVolume,
-		order.Direction, order.OpenCloseType,
-		order.PriceCond,
-		order.TimeCond,
-		order.VolumeCond,
-		order.Status,
+		order.ExchangeID.c_str(), order.InstrumentID.c_str(), order.Price, order.Volume, order.NoTradedVolume,
+		(int)order.Direction, (int)order.OpenCloseType,
+		(int)order.PriceCond,
+		(int)order.TimeCond,
+		(int)order.VolumeCond,
+		(int)order.Status,
 		order.StatusMsg.c_str(),
 		order.OrderTime.c_str()
 	);
@@ -158,10 +120,10 @@ static void  PrintOrderInfo(const XFinApi::TradeApi::Order &order)
 
 static void  PrintTradeInfo(const XFinApi::TradeApi::TradeOrder &trade)
 {
-	printf("  ID=%s, OrderID=%s, ExchangeID=%s, InstID=%s, Price=%g, Volume=%lld, Direction=%d, OpenCloseType=%d, %s\n",
+	printf("  ID=%s, OrderID=%s, ExchangeID=%s, InstID=%s, Price=%g, Volume=%ld, Direction=%d, OpenCloseType=%d, %s\n",
 		trade.TradeID.c_str(), trade.OrderID.c_str(),
 		trade.ExchangeID.c_str(), trade.InstrumentID.c_str(), trade.Price, trade.Volume,
-		trade.Direction, trade.OpenCloseType,
+		(int)trade.Direction, (int)trade.OpenCloseType,
 		trade.TradeTime.c_str());
 }
 
@@ -174,10 +136,9 @@ static void  PrintInstrumentInfo(const XFinApi::TradeApi::Instrument &inst)
 
 static void  PrintPositionInfo(const XFinApi::TradeApi::Position &pos)
 {
-	printf("  ExchangeID=%s, InstID=%s, BuyPosition=%lld, SellPosition=%lld\n",
+	printf("  ExchangeID=%s, InstID=%s, BuyPosition=%ld, SellPosition=%ld\n",
 		pos.ExchangeID.c_str(), pos.InstrumentID.c_str(),
-		DEFAULT_FILTER(pos.BuyPosition), 
-		DEFAULT_FILTER(pos.SellPosition));
+		DEFAULT_FILTER(pos.BuyPosition), DEFAULT_FILTER(pos.SellPosition));
 }
 
 static void  PrintAccountInfo(const XFinApi::TradeApi::Account &acc)
@@ -192,8 +153,8 @@ static void  PrintAccountInfo(const XFinApi::TradeApi::Account &acc)
 static bool TimeIsSmaller(const std::string &lhs, const std::string &rhs)
 {
 	int h1, m1, s1, h2, m2, s2;
-	sscanf_s(lhs.c_str(), "%d:%d:%d", &h1, &m1, &s1);
-	sscanf_s(rhs.c_str(), "%d:%d:%d", &h2, &m2, &s2);
+	sscanf(lhs.c_str(), "%d:%d:%d", &h1, &m1, &s1);
+	sscanf(rhs.c_str(), "%d:%d:%d", &h2, &m2, &s2);
 
 	if (h1 == h2)
 	{
@@ -378,13 +339,10 @@ public:
 void MarketTest()
 {
 	//创建 IMarket
-	//const char* path 指 xxx.exe 同级子目录中的 xxx.dll 文件
+	//const char* path 指 xxx.exe 同级子目录中的 xxx.so 文件
 	int err = -1;
-#ifdef _DEBUG
-	market = XFinApi_CreateMarketApi("XTA_W32/Api/ZDCTP_v20180404/XFinApi.ZDCTPTradeApid.dll", &err);
-#else
-	market = XFinApi_CreateMarketApi("XTA_W32/Api/ZDCTP_v20180404/XFinApi.ZDCTPTradeApi.dll", &err);
-#endif
+
+	market = XFinApi_CreateMarketApi("XTA_L64/Api/ZDCTP_v20180404/XFinApi.ZDCTPTradeApi.so", &err);
 
 	if (err || !market)
 	{
@@ -409,8 +367,8 @@ void MarketTest()
 	连接成功后才能执行订阅行情等操作，检测方法有两种：
 	1、IMarket::IsOpened()=true
 	2、MarketListener::OnNotify中
-	(int)XFinApi::TradeApi::Action::Open == notifyParams.Action &&
-	(int)XFinApi::TradeApi::Result::Success == notifyParams.Result
+	(int)XFinApi::TradeApi::ActionKind::Open == notifyParams.ActionType &&
+	(int)XFinApi::TradeApi::ResultKind::Success == notifyParams.ResultType
 	*/
 
 	/* 行情相关方法
@@ -419,6 +377,7 @@ void MarketTest()
 
 	//订阅行情，已在MarketEvent::OnNotify中订阅
 	XFinApi::TradeApi::QueryParams param;
+	param.ExchangeID = Cfg.ExchangeID;
 	param.InstrumentID = Cfg.InstrumentID;
 	market->Subscribe(param);
 
@@ -432,13 +391,11 @@ void MarketTest()
 void TradeTest()
 {
 	//创建 ITrade
-	//const char* path 指 xxx.exe 同级子目录中的 xxx.dll 文件
+	//const char* path 指 xxx.exe 同级子目录中的 xxx.so 文件
 	int err = -1;
-#ifdef _DEBUG
-	trade = XFinApi_CreateTradeApi("XTA_W32/Api/ZDCTP_v20180404/XFinApi.ZDCTPTradeApid.dll", &err);
-#else
-	trade = XFinApi_CreateTradeApi("XTA_W32/Api/ZDCTP_v20180404/XFinApi.ZDCTPTradeApi.dll", &err);
-#endif
+
+	trade = XFinApi_CreateTradeApi("XTA_L64/Api/ZDCTP_v20180404/XFinApi.ZDCTPTradeApi.so", &err);
+
 	if (err || !trade)
 	{
 		printf("* Trade XFinApiCreateError=%s;\n", StrCreateErrors[err]);
@@ -464,7 +421,7 @@ void TradeTest()
 	2、TradeListener::OnNotify中
 	(int)XFinApi::TradeApi::ActionKind::Open == notifyParams.ActionType &&
 	(int)XFinApi::TradeApi::ResultKind::Success == notifyParams.ResultType
-	 */
+	*/
 	while (!trade->IsOpened())
 		std::this_thread::sleep_for(std::chrono::seconds(1));
 

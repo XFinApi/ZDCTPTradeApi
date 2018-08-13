@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy $(SolutionDir)..\XTA_W32\Api\ZDCTP_v20171130 $(OutDir)XTA_W32\Api\ZDCTP_v20171130 /I /E /Y&#xD;&#xA;xcopy $(SolutionDir)..\XTA_W32\CSharpCore\XFinApi.ITradeApi.PortCS.dll $(OutDir) /Y" />
+    <Exec Command="xcopy $(SolutionDir)..\XTA_W32\Api\ZDCTP_v20180404 $(OutDir)XTA_W32\Api\ZDCTP_v20180404 /I /E /Y&#xD;&#xA;xcopy $(SolutionDir)..\XTA_W32\CSharpCore\XFinApi.ITradeApi.PortCS.dll $(OutDir) /Y" />
   </Target>
 
   <ItemGroup>
