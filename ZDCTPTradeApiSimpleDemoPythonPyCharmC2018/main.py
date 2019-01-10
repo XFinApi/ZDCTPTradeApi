@@ -204,11 +204,11 @@ class TradeEvent(XFinApi_TradeApi.TradeListener):
 
     def OnQueryAccount(self,accInfo):
          print("- OnQueryAccount")
-         print("  AccountID={}, CurrencyNo={}, Available={}, Equity={}, Balance={}, Commission={}, "
-               "CurrMargin={}, CloseProfit={}, Deposit={}, Withdraw={}, PreAvailable={}"
-               .format(accInfo.AccountID, accInfo.CurrencyNo, accInfo.Available, accInfo.Equity,accInfo.Balance,
+         print("  AccountID={}, CurrencyNo={}, Available={},  Balance={}, Commission={}, "
+               "CurrMargin={}, CloseProfit={}, Deposit={}, Withdraw={}"
+               .format(accInfo.AccountID, accInfo.CurrencyNo, accInfo.Available, accInfo.Balance,
                        accInfo.Commission, accInfo.CurrMargin, accInfo.CloseProfit,
-                       accInfo.Deposit, accInfo.Withdraw, accInfo.PreAvailable))
+                       accInfo.Deposit, accInfo.Withdraw))
 
 
 class TradeTest:

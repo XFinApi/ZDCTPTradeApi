@@ -125,11 +125,11 @@ namespace ZDCTPTradeApiSimpleDemoCSharp2015
 
         static void PrintAccountInfo(Account acc)
         {
-            Console.WriteLine(string.Format("  AccountID={0}, CurrencyNo={1}, Available={2:g}, Equity={3:g}, PreBalance={4:g}, Commission={5:g}, CurrMargin={6:g}, CloseProfit={7:g}, Deposit={8:g}, Withdraw={9:g}, PreAvailable={10:g}",
+            Console.WriteLine(string.Format("  AccountID={0}, CurrencyNo={1}, Available={2:g}, PreBalance={3:g}, Commission={4:g}, CurrMargin={5:g}, CloseProfit={6:g}, Deposit={7:g}, Withdraw={8:g}",
                acc.AccountID, acc.CurrencyNo,
-                acc.Available, acc.Equity, acc.PreBalance,
+                acc.Available, acc.PreBalance,
                 acc.Commission, acc.CurrMargin, acc.CloseProfit,
-                acc.Deposit, acc.Withdraw, acc.PreAvailable));
+                acc.Deposit, acc.Withdraw));
         }
 
         //////////////////////////////////////////////////////////////////////////////////

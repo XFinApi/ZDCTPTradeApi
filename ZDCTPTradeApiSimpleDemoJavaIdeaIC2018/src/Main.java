@@ -111,11 +111,10 @@ public class Main {
     }
 
     static void PrintAccountInfo(XFinApi.TradeApi.Account acc) {
-        System.out.println(String.format("    AccountID=%s, CurrencyNo=%s, Available=%g, Equity=%g, Balance=%g, Commission=%g, CurrMargin=%g, CloseProfit=%g, Deposit=%g, Withdraw=%g, PreAvailable=%g",
+        System.out.println(String.format("    AccountID=%s, CurrencyNo=%s, Available=%g, Balance=%g, Commission=%g, CurrMargin=%g, CloseProfit=%g, Deposit=%g, Withdraw=%g",
                 acc.getAccountID(), acc.getCurrencyNo(),
-                acc.getAvailable(), acc.getEquity(), acc.getBalance(), acc.getCommission(),
-				acc.getCurrMargin(), acc.getCloseProfit(), acc.getDeposit(), acc.getWithdraw(),
-				acc.getPreAvailable()));
+                acc.getAvailable(), acc.getBalance(), acc.getCommission(),
+				acc.getCurrMargin(), acc.getCloseProfit(), acc.getDeposit(), acc.getWithdraw()));
     }
 
     //////////////////////////////////////////////////////////////////////////////////

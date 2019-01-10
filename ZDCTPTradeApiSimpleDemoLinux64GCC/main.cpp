@@ -43,7 +43,7 @@ public:
 		CurrencyNo = "USD";//币种
 
 		ExchangeID = "CME";
-		InstrumentID = "GC1812";
+		InstrumentID = "GC1912";
 	}
 };
 
@@ -143,11 +143,10 @@ static void  PrintPositionInfo(const XFinApi::TradeApi::Position &pos)
 
 static void  PrintAccountInfo(const XFinApi::TradeApi::Account &acc)
 {
-	printf("  AccountID=%s, CurrencyNo=%s, Available=%g, Equity=%g, Balance=%g, Commission=%g, CurrMargin=%g, CloseProfit=%g, Deposit=%g, Withdraw=%g, PreAvailable=%g\n",
+	printf("  AccountID=%s, CurrencyNo=%s, Available=%g, Balance=%g, Commission=%g, CurrMargin=%g, CloseProfit=%g, Deposit=%g, Withdraw=%g\n",
 		acc.AccountID.c_str(), acc.CurrencyNo.c_str(),
-		DEFAULT_FILTER(acc.Available), DEFAULT_FILTER(acc.Equity), DEFAULT_FILTER(acc.Balance), DEFAULT_FILTER(acc.Commission),
-		DEFAULT_FILTER(acc.CurrMargin), DEFAULT_FILTER(acc.CloseProfit), DEFAULT_FILTER(acc.Deposit), DEFAULT_FILTER(acc.Withdraw),
-		DEFAULT_FILTER(acc.PreAvailable));
+		DEFAULT_FILTER(acc.Available), DEFAULT_FILTER(acc.Balance), DEFAULT_FILTER(acc.Commission),
+		DEFAULT_FILTER(acc.CurrMargin), DEFAULT_FILTER(acc.CloseProfit), DEFAULT_FILTER(acc.Deposit), DEFAULT_FILTER(acc.Withdraw));
 }
 
 static bool TimeIsSmaller(const std::string &lhs, const std::string &rhs)
@@ -486,6 +485,10 @@ void TradeTest()
 
 int main()
 {
+	#if defined(__unix__)
+	system("sudo echo");
+	#endif
+	
 	//可在Config类中修改用户名、密码、合约等信息
 
 	MarketTest();
