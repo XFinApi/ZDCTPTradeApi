@@ -255,6 +255,8 @@ namespace XFinApi
 			UserRightTypeKind TodayUserRightType = UserRightTypeKind::OpenPrice;
 			// 昨仓保证金价格
 			UserRightTypeKind YesterdayUserRightType = UserRightTypeKind::PreSettlementPrice;
+			// 持仓类型
+			//PositionTypeKind  PositionType = PositionTypeKind::Gross;
 
 		};
 	}
