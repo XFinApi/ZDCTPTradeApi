@@ -258,6 +258,11 @@ namespace XFinApi
 			// 持仓类型
 			//PositionTypeKind  PositionType = PositionTypeKind::Gross;
 
+                        // 自成交数
+                        int64_t SelfClosingCount = 0;
+                        // 自成交量
+                        int64_t SelfClosingVolume = 0;
+
 		};
 	}
 }
